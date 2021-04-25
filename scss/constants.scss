@@ -1,0 +1,224 @@
+$color-white-1: rgb(255, 255, 255);
+$color-white-2: rgb(215 219 223);
+$color-gray-0: #777f84;
+$color-gray-1: rgb(89, 93, 95);
+$color-gray-2: rgb(61 72 79);
+$color-gray-3: rgb(48, 54, 62);
+$color-gray-4: rgb(34, 43, 47);
+$color-gray-5: rgb(27 36 40);
+
+$color-green-bright: rgb(16, 237, 3);
+$color-green: rgb(52, 216, 157);
+$color-green-faded: rgb(66 132 108);
+$color-yellow: rgb(215 221 110);
+$color-blue: rgb(91, 144, 191);
+$color-orange-red: #f26419;
+$color-orange-yellow: #f6ae2d;
+$color-blue-light: #86bbd8;
+$color-blue-dark: #33658a;
+
+$color-blue-bright: rgb(43 93 255);
+$color-blue-faded: rgb(43 93 255 / 8%);
+$color-orange: rgb(255 159 11);
+$color-orange-faded: rgb(255 159 11 / 8%);
+
+$color-background: $color-gray-3;
+$color-foreground: $color-gray-5;
+$color-foreground-faded: $color-gray-4;
+$color-font: $color-white-2;
+$color-font-bright: $color-white-1;
+$color-font-faded: $color-gray-0;
+$color-font-dark: $color-gray-1;
+$color-border: $color-gray-1;
+
+$color-strength: $color-blue-bright;
+$color-strength-faded: $color-blue-faded;
+$color-hypertrophy: $color-orange;
+$color-hypertrophy-faded: $color-orange-faded;
+
+$color-isolation: $color-orange-red;
+$color-compound: $color-orange-yellow;
+$color-synergist: $color-blue-light;
+$color-stabilizer: $color-blue-dark;
+
+$z-overlay: 1;
+
+$s: 8px;
+
+$box-border-radius: 4px;
+
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 300;
+  src: url("./fonts/NotoSansJP-Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 400;
+  src: url("./fonts/NotoSansJP-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Noto Sans JP";
+  font-weight: 700;
+  src: url("./fonts/NotoSansJP-Bold.otf") format("opentype");
+}
+
+.label {
+  font-family: "Noto Sans JP", sans-serif;
+  text-transform: uppercase;
+  color: $color-font;
+
+  &--large {
+    @extend .label;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 20px;
+    text-transform: none;
+  }
+  &--medium {
+    @extend .label;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  &--medium--light {
+    @extend .label--medium;
+    font-weight: 300;
+  }
+  &--medium--str {
+    @extend .label--medium;
+    color: $color-strength;
+  }
+  &--medium--hyp {
+    @extend .label--medium;
+    color: $color-hypertrophy;
+  }
+  &--medium--isolation {
+    @extend .label--medium;
+    color: $color-isolation;
+  }
+  &--medium--compound {
+    @extend .label--medium;
+    color: $color-compound;
+  }
+  &--medium--synergist {
+    @extend .label--medium;
+    color: $color-synergist;
+  }
+  &--medium--stabilizer {
+    @extend .label--medium;
+    color: $color-stabilizer;
+  }
+  &--medium--heavy {
+    @extend .label;
+    font-size: 12px;
+    font-weight: 700;
+    color: $color-font-bright;
+    fill: $color-font-bright;
+  }
+  &--medium--faded {
+    @extend .label;
+    font-size: 14px;
+    font-weight: 400;
+    color: $color-font-faded;
+    fill: $color-font-faded;
+  }
+  &--medium--green {
+    @extend .label--medium;
+    color: $color-green;
+  }
+  &--small {
+    @extend .label;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  &--small--heavy {
+    @extend .label--small;
+    font-weight: 700;
+  }
+  &--small--light {
+    @extend .label--small;
+    font-weight: 300;
+  }
+  &--small--faded {
+    @extend .label--small;
+    font-weight: 400;
+    color: $color-font-faded;
+    fill: $color-font-faded;
+  }
+  &--tiny {
+    @extend .label;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 10px;
+  }
+  &--tiny--heavy {
+    @extend .label--tiny;
+    font-weight: 700;
+  }
+  &--tiny--dark {
+    @extend .label--tiny;
+    color: $color-font-dark;
+    fill: $color-font-dark;
+  }
+  &--very-tiny {
+    @extend .label;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 8px;
+  }
+  &--very-tiny--dark {
+    @extend .label--very-tiny;
+    color: $color-font-dark;
+    fill: $color-font-dark;
+  }
+
+
+  &--small--str {
+    @extend .label--small;
+    color: $color-strength;
+  }
+  &--small--hyp {
+    @extend .label--small;
+    color: $color-hypertrophy;
+  }
+  &--small--isolation {
+    @extend .label--small;
+    color: $color-isolation;
+  }
+  &--small--compound {
+    @extend .label--small;
+    color: $color-compound;
+  }
+  &--small--synergist {
+    @extend .label--small;
+    color: $color-synergist;
+  }
+  &--small--stabilizer {
+    @extend .label--small;
+    color: $color-stabilizer;
+  }
+}
+
+.text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  color: $color-font;
+
+  &--small {
+    @extend .text;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  &--small--light {
+    @extend .text--small;
+    font-weight: 300;
+  }
+  &--medium {
+    @extend .text;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

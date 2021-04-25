@@ -1,0 +1,140 @@
+@import './constants.scss';
+
+.chart {
+  min-width: 500px;
+  width: 100%;
+  height: 500px;
+}
+
+.recharts-text {
+  @extend .label--small--faded;
+}
+
+.recharts-cartesian-axis-line {
+  stroke: $color-gray-1;
+}
+.recharts-cartesian-axis-tick-line {
+  stroke: $color-gray-1;
+}
+.recharts-tooltip-cursor {
+  fill: $color-foreground-faded;
+}
+
+.recharts-reference-area-rect {
+  fill: $color-foreground-faded;
+  fill-opacity: 1;
+
+  .reference-hypertrophy & {
+    fill: $color-hypertrophy-faded;
+  }
+  .reference-strength & {
+    fill: $color-strength-faded;
+  }
+}
+
+.recharts-reference-area {
+  font-weight: 700;
+  &.reference-hypertrophy .recharts-text {
+    text-transform: uppercase;
+    fill: $color-hypertrophy;
+    fill-opacity: 0.9;
+  }
+  &.reference-strength .recharts-text {
+    text-transform: uppercase;
+    fill: $color-strength;
+    fill-opacity: 0.9;
+  }
+}
+
+.reference-area--muscle-group .recharts-reference-area-rect {
+  fill: none;
+}
+
+.recharts-reference-line-line {
+  .reference-line--strength & {
+    stroke: $color-strength;
+  }
+
+  .reference-line--hypertrophy & {
+    stroke: $color-hypertrophy;
+  }
+
+  .reference-line--bodypart & {
+    stroke: $color-font-faded;
+  }
+}
+
+.recharts-reference-line .recharts-text {
+  fill: $color-font;
+  fill-opacity: 80%;
+}
+
+.bar {
+  &.bar--isolation {
+    fill: $color-isolation;
+  }
+  &.bar--compound {
+    fill: $color-compound;;
+  }
+  &.bar--synergist {
+    fill: $color-synergist;
+  }
+  &.bar--stabilizer {
+    fill: $color-stabilizer;
+  }
+}
+
+.tooltip {
+  background-color: $color-foreground;
+  padding: $s;
+  white-space: nowrap;
+}
+
+.tooltip td {
+  vertical-align: top;
+}
+
+.tooltip__title {
+  @extend .label--small--heavy;
+  margin-bottom: $s;
+}
+
+.tooltip__td--label {
+  @extend .label--small--light;
+  text-align: left;
+
+  .tooltip__tr--isolation & {
+    color: $color-isolation;
+  }
+  .tooltip__tr--compound & {
+    color: $color-compound;;
+  }
+  .tooltip__tr--synergist & {
+    color: $color-synergist;
+  }
+  .tooltip__tr--stabilizer & {
+    color: $color-stabilizer;
+  }
+}
+
+.tooltip__td--text {
+  text-align: left;
+  @extend .text--small;
+
+  .tooltip__tr--very-light & {
+    color: $color-font-faded;
+  }
+}
+
+.tooltip__td--value {
+  @extend .text--small;
+
+  tr:last-child & {
+    padding-top: $s;
+    border-top: solid 1px $color-border;
+  }
+
+  .tooltip__tr--very-light & {
+    color: $color-font-faded;
+  }
+}

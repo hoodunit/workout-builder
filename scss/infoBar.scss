@@ -1,0 +1,53 @@
+@import './constants.scss';
+
+.section {
+  margin: 2*$s 0;
+}
+
+.section__title {
+  @extend .label--medium;
+  margin-top: 2*$s;
+  margin-bottom: $s;
+}
+
+.section__content {
+  color: $color-font-faded;
+}
+
+a.reference {
+  margin-bottom: $s;
+  display: block;
+  color: $color-font-faded;
+
+  &:target {
+    animation: flash-reference 1s;
+  }
+}
+
+@keyframes flash-reference {
+  50% {
+    color: $color-green;
+  }
+}
+
+.reference__item {
+  display: inline-block;
+}
+
+.reference-link {
+  @extend .label--small--faded;
+}
+
+.citation-link {
+  @extend .label--tiny--dark;
+  margin: 0 4px;
+  vertical-align: top;
+}
+
+.paragraph {
+  margin-top: $s;
+
+  section__content:first-child & {
+    margin-top: 0;
+  }
+}

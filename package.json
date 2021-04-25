@@ -1,0 +1,33 @@
+{
+  "name": "workout-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "spago build",
+    "build:prod": "mkdir -p output_prod && cp -r static/* output_prod/ && rm -rf dist && spago bundle-app --main WorkoutBuilder.Client.Main --to output_prod/index.js && parcel build --no-content-hash --public-url . output_prod/index.html",
+    "build:prod:bundle": "parcel build --no-content-hash --public-url . static/index.html",
+    "build:dev": "spago build --watch",
+    "build:dev:bundle": "spago build --watch --then 'npm run build:prod:bundle'",
+    "build:typescript": "tsc --project tsconfig.json --watch",
+    "start": "spago run -m WorkoutBuilder.Main --watch",
+    "start:dev": "parcel static/index.html",
+    "test": "spago test --watch --main WorkoutBuilder.Test.Main"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "parcel": "1.12.3",
+    "purescript": "^0.14.0",
+    "sass": "^1.32.8",
+    "spago": "^0.19.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "recharts": "^2.0.9"
+  }
+}

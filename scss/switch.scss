@@ -1,0 +1,31 @@
+@import './constants.scss';
+
+.switch {
+  display: flex;
+}
+
+.switch__option {
+  padding: 2px 4px;
+  color: $color-font;
+  background: $color-foreground;
+  border: solid 1px $color-foreground;
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+  @extend .label--small;
+
+  &--active {
+    @extend .switch__option;
+    border: solid 1px $color-green;
+    color: $color-green;
+  }
+
+  &:hover {
+    border-color: $color-green;
+    color: $color-green;
+  }
+  &:active {
+    border-color: $color-white-1;
+    color: $color-white-1;
+  }
+}
