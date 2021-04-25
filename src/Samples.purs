@@ -187,22 +187,22 @@ fiveThreeOnePeriods =
 fiveThreeOneSchemes :: Map Intensity RepScheme
 fiveThreeOneSchemes =
   Map.fromFoldable
-  [ Tuple H {sets: 3, reps: {min: 1, max: 5} } -- @75-95% 1RM
-  , Tuple M {sets: 3, reps: {min: 3, max: 3} } -- @70-90% 1RM
-  , Tuple L {sets: 3, reps: {min: 5, max: 5} } -- @65-85% 1RM
-  , Tuple VL {sets: 3, reps: {min: 5, max: 5} } -- @40-60% 1RM
+  [ Tuple H {sets: 5, reps: {min: 1, max: 5} } -- @75-95% 1RM
+  , Tuple M {sets: 1, reps: {min: 3, max: 3} } -- @70-90% 1RM
+  , Tuple L {sets: 1, reps: {min: 5, max: 5} } -- @65-85% 1RM
+  , Tuple VL {sets: 1, reps: {min: 5, max: 5} } -- @40-60% 1RM
   ]
 
 fiveThreeOneLight :: Map Intensity RepScheme
 fiveThreeOneLight =
   Map.fromFoldable
-  [ Tuple M {sets: 5, reps: {min: 10, max: 10} }
+  [ Tuple M {sets: 1, reps: {min: 10, max: 10} }
   ]
 
 fiveThreeOneLighter :: Map Intensity RepScheme
 fiveThreeOneLighter =
   Map.fromFoldable
-  [ Tuple M {sets: 5, reps: {min: 15, max: 15} } ]
+  [ Tuple M {sets: 1, reps: {min: 15, max: 15} } ]
 
 
 strongLifts :: ProgramParams
@@ -251,4 +251,4 @@ strongLifts =
 
 fiveByFive =
   defaultRepSchemes
-  # Map.insert M {sets: 5, reps: {min: 5, max: 5}}
+  # Map.insert M {sets: 1, reps: {min: 5, max: 5}}
