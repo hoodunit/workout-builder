@@ -37,11 +37,11 @@ rrParams =
       ]
     , groups =
         [ { name: "push"
-          , exercises: [pushUp, dip]
+          , exercises: [pushUp, weightedDip]
           , periodization: NoPeriodization
           , targetSets: 18 }
         , { name: "pull"
-          , exercises: [pullUp, row]
+          , exercises: [pullUp, frontLeverRow]
           , periodization: NoPeriodization
           , targetSets: 18 }
         , { name: "core"
@@ -49,7 +49,7 @@ rrParams =
           , periodization: NoPeriodization
           , targetSets: 27 }
         , { name: "legs"
-          , exercises: [squat, hinge]
+          , exercises: [shrimpSquat, nordicCurl]
           , periodization: NoPeriodization
           , targetSets: 18 }
         ]
@@ -85,15 +85,15 @@ rrNoCore =
       ]
     , groups =
         [ { name: "push"
-          , exercises: [pushUp, dip]
+          , exercises: [pushUp, weightedDip]
           , periodization: NoPeriodization
           , targetSets: 18 }
         , { name: "pull"
-          , exercises: [pullUp, row]
+          , exercises: [pullUp, frontLeverRow]
           , periodization: NoPeriodization
           , targetSets: 18 }
         , { name: "legs"
-          , exercises: [squat, hinge]
+          , exercises: [shrimpSquat, nordicCurl]
           , periodization: NoPeriodization
           , targetSets: 18 }
         ]
@@ -117,7 +117,7 @@ minimalist =
           , periodization: NoPeriodization
           , targetSets: 20 }
         , { name: "legs"
-          , exercises: [squat]
+          , exercises: [shrimpSquat]
           , periodization: NoPeriodization
           , targetSets: 20 }
         ]

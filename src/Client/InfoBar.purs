@@ -35,6 +35,7 @@ infoContent =
     , section "Exercise selection"
       [ par [ text "Prefer compound exercises over isolation exercises for both strength and hypertrophy.", citePage Refs.low 73, citePage Refs.israetelStr 92, citePage Refs.israetelHyp 28 ]
       , par [ ref Refs.low, text " generally recommends choosing two exercise progressions from each of the following categories: push, pull, and legs. At intermediate or advanced levels a third exercise can be added to each category. In addition ", ref Refs.low, text " recommends balancing between horizontal and vertical pushing/pulling exercises (e.g. pull-ups vs bodyweight rows)." ]
+      , par [ text "In bodyweight training we refer to bodyweight exercise ", HH.i_ [text "progressions"], text ", while weight lifting has specific exercises with varying weights." ]
       ]
     , section "Intensity and Progressive Overload"
       [ par [ text "All exercise sets should be performed to within a few reps of failure (5 reps in reserve or less ", citePage Refs.israetelHyp 56, text ")." ]

@@ -10,21 +10,24 @@ allExercises =
   [ bulgarianSplitSquat
   , squat
   , pistolSquat
+  , shrimpSquat
   , singleLegRdl
-  , hinge
-  , dip
+  , nordicCurl
+  , weightedDip
   , ringDip
   , pushUp
   , weightedRingPushUp
   , pikePushUp
   , handstandPushUp
   , pseudoPlanchePushUp
+  , archerPullUp
+  , oneArmPullUp
   , pullUp
   , chinUp
   , weightedPullUp
-  , row
   , frontLeverRow
   , weightedHorizontalRow
+  , oneArmRow
   , bicepCurl
   , lateralRaise
   , shrug
@@ -67,9 +70,20 @@ pistolSquat =
     , stabilizers: set [hamstrings, gastrocnemius, gluteusMedius, gluteusMinimus, quadratusLumborum, obliques, rectusAbdominus, iliopsoas, tensorFasciaeLatae, pectineus, sartorius]
     }
   }
+shrimpSquat :: Exercise
+shrimpSquat =
+  { name: "Shrimp squat"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles:
+    { target: set [quadriceps]
+    , synergists: set [gluteusMaximus, adductorMagnus, soleus]
+    , stabilizers: set [hamstrings, gastrocnemius, erectorSpinae, gluteusMedius, gluteusMinimus, quadratusLumborum, obliques, rectusAbdominus]
+    }
+  }
 squat :: Exercise
 squat =
-  { name: "Squat"
+  { name: "Back squat"
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles:
@@ -89,16 +103,21 @@ singleLegRdl =
     , stabilizers: set [erectorSpinae, quadriceps, gluteusMaximus, gluteusMinimus, quadratusLumborum, obliques, gluteusMaximus, rectusAbdominus]
     }
   }
-hinge :: Exercise
-hinge =
-  { name: "Hinge"
+nordicCurl :: Exercise
+nordicCurl =
+  { name: "Nordic curl"
   , scheme: defaultRepSchemes
   , category: Compound
-  , muscles: singleLegRdl.muscles
+  -- exrx: "Inverse leg curl"
+  , muscles:
+    { target: set [hamstrings]
+    , synergists: set [gastrocnemius, gracilis, sartorius, popliteus]
+    , stabilizers: set [gluteusMaximus, adductorMagnus, erectorSpinae, rectusAbdominus, obliques, rectusFemoris, tibialisAnterior]
+    }
   }
-dip :: Exercise
-dip =
-  { name: "Dip"
+weightedDip :: Exercise
+weightedDip =
+  { name: "Weighted bar dip"
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles:
@@ -109,6 +128,17 @@ dip =
   }
 ringDip :: Exercise
 ringDip =
+  { name: "Ring dip progression"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles:
+    { target: set [pecsLower]
+    , synergists: set [deltoidAnterior, triceps, pecsUpper, pecsMinor, rhomboids, levatorScapulae, lats, teresMajor]
+    , stabilizers: set [trapsLower]
+    }
+  }
+weightedRingDip :: Exercise
+weightedRingDip =
   { name: "Weighted ring dip"
   , scheme: defaultRepSchemes
   , category: Compound
@@ -120,13 +150,24 @@ ringDip =
   }
 pushUp :: Exercise
 pushUp =
-  { name: "Push-up"
+  { name: "Push-up progression"
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles:
     { target: set [pecsLower]
     , synergists: set [pecsUpper, deltoidAnterior, triceps]
     , stabilizers: set [biceps, rectusAbdominus, obliques, quadriceps, erectorSpinae]
+    }
+  }
+ringPushUp :: Exercise
+ringPushUp =
+  { name: "Ring push-up progression"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles:
+    { target: set [pecsLower]
+    , synergists: set [pecsUpper, deltoidAnterior, triceps]
+    , stabilizers: set [biceps, rectusAbdominus, obliques, pecsMinor, serratusAnterior, quadriceps, gastrocnemius, soleus, erectorSpinae]
     }
   }
 weightedRingPushUp :: Exercise
@@ -172,7 +213,7 @@ pseudoPlanchePushUp =
   }
 pullUp :: Exercise
 pullUp =
-  { name: "Pull-up"
+  { name: "Pull-up progression"
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles:
@@ -181,9 +222,23 @@ pullUp =
     , stabilizers: set [triceps]
     }
   }
+archerPullUp :: Exercise
+archerPullUp =
+  { name: "Archer pull-up"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles: pullUp.muscles
+  }
+oneArmPullUp :: Exercise
+oneArmPullUp =
+  { name: "One-arm pull-up"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles: pullUp.muscles
+  }
 chinUp :: Exercise
 chinUp =
-  { name: "Chin-up"
+  { name: "Chin-up progression"
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles:
@@ -199,30 +254,30 @@ weightedPullUp =
   , category: Compound
   , muscles: pullUp.muscles
   }
-row :: Exercise
-row =
-  { name: "Bodyweight Row"
-  , scheme: defaultRepSchemes
-  , category: Compound
-  , muscles:
-    { target: set [] -- "Back, General"
-    , synergists: set [trapsMiddle, trapsLower, rhomboids, lats, teresMajor, deltoidPosterior, infraspinatus, teresMinor, brachialis, brachioradialis, pecsLower]
-    , stabilizers: set [biceps, triceps, erectorSpinae, hamstrings, gluteusMaximus, rectusAbdominus, obliques]
-    }
-  }
 frontLeverRow :: Exercise
 frontLeverRow =
   { name: "Front lever row"
   , scheme: defaultRepSchemes
   , category: Compound
-  , muscles: row.muscles
+  , muscles: -- exrx bodyweight row
+    { target: set [] -- "Back, General"
+    , synergists: set [trapsMiddle, trapsLower, rhomboids, lats, teresMajor, deltoidPosterior, infraspinatus, teresMinor, brachialis, brachioradialis, pecsLower]
+    , stabilizers: set [biceps, triceps, erectorSpinae, hamstrings, gluteusMaximus, rectusAbdominus, obliques]
+    }
   }
 weightedHorizontalRow :: Exercise
 weightedHorizontalRow =
   { name: "Weighted horizontal row"
   , scheme: defaultRepSchemes
   , category: Compound
-  , muscles: row.muscles
+  , muscles: frontLeverRow.muscles
+  }
+oneArmRow :: Exercise
+oneArmRow =
+  { name: "One arm row"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles: frontLeverRow.muscles
   }
 bicepCurl :: Exercise
 bicepCurl =
