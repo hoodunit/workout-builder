@@ -111,15 +111,15 @@ minimalist =
         [ { name: "push"
           , exercises: [pushUp]
           , periodization: NoPeriodization
-          , targetSets: 20 }
+          , targetSets: 18 }
         , { name: "pull"
           , exercises: [pullUp]
           , periodization: NoPeriodization
-          , targetSets: 20 }
+          , targetSets: 18 }
         , { name: "legs"
           , exercises: [shrimpSquat]
           , periodization: NoPeriodization
-          , targetSets: 20 }
+          , targetSets: 18 }
         ]
     }
 
