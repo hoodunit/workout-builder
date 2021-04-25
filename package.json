@@ -4,15 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "spago build",
-    "build:prod": "mkdir -p output_prod && cp -r static/* output_prod/ && rm -rf dist && spago bundle-app --main WorkoutBuilder.Client.Main --to output_prod/index.js && parcel build --no-content-hash --public-url . output_prod/index.html",
+    "build:prod": "spago build && npm run build:prod:bundle",
     "build:prod:bundle": "parcel build --no-content-hash --public-url . static/index.html",
-    "build:dev": "spago build --watch",
-    "build:dev:bundle": "spago build --watch --then 'npm run build:prod:bundle'",
-    "build:typescript": "tsc --project tsconfig.json --watch",
-    "start": "spago run -m WorkoutBuilder.Main --watch",
-    "start:dev": "parcel static/index.html",
-    "test": "spago test --watch --main WorkoutBuilder.Test.Main"
+    "build:watch": "spago build --watch --then 'npm run build:prod:bundle'",
+    "build:typescript:watch": "tsc --project tsconfig.json --watch",
+    "clean": "rm -rf output dist"
   },
   "author": "",
   "license": "ISC",
