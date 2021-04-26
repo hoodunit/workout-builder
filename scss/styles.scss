@@ -395,16 +395,20 @@ td {
 .exercise-entry {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: $s 0;
 
   &--button {
     @extend .exercise-entry;
-    justify-content: center;
     cursor: pointer;
 
     &:hover {
       color: $color-font-bright;
       background-color: $color-gray-4;
+
+      .icon-button {
+        opacity: 1;
+      }
     }
 
     &:active {
@@ -416,6 +420,10 @@ td {
       @extend .label--small--faded;
       flex-grow: 0;
     }
+  }
+  &--button--center {
+    @extend .exercise-entry--button;
+    justify-content: center;
   }
 }
 

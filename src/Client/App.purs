@@ -245,16 +245,14 @@ groupBox index group =
   where
     exerciseItem :: Int -> Exercise -> HTML w Action
     exerciseItem index exercise@{name, category} =
-      div [cls "exercise-entry"]
+      div [ cls "exercise-entry--button"
+          , onClick (const $ ShowExerciseInfo {group, exercise, index})]
       [ div [cls "exercise-entry__label"] [text name]
-      , div [cls "exercise-entry__tag chip"] [text (case category of
-                                        Compound -> "compound"
-                                        Isolation -> "isolation")]
-      , div [cls "icon-button", onClick (const $ ShowExerciseInfo {group, exercise, index})]
+      , div [cls "icon-button"]
         [ img [cls "btn-settings", HP.src images.settings ] ]
       ]
     addExercise :: HTML w Action
-    addExercise = div [ cls "exercise-entry--button"
+    addExercise = div [ cls "exercise-entry--button--center"
                          , onClick (const $ ShowAddExerciseModal {group})]
       [ img [ cls "exercise-entry__btn btn-add", HP.src images.add ]
       , div [cls "exercise-entry__label"] [text "Add Exercise"] ]
