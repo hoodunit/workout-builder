@@ -41,6 +41,7 @@ editExerciseModal {group, index, exercise: exercise@{name, scheme, muscles, cate
       , div [cls "rep-range-inputs"] (repRangeInput scheme <$> allIntensities)
       , div [cls "form-label"] [text "Muscles used in exercise:"]
       , musclesList muscles
+      , button [onClick (const $ RemoveExercise {group, index})] [text "Delete Exercise"]
       ]
     ]
   where

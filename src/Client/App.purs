@@ -251,11 +251,7 @@ groupBox index group =
                                         Compound -> "compound"
                                         Isolation -> "isolation")]
       , div [cls "icon-button", onClick (const $ ShowExerciseInfo {group, exercise, index})]
-        [ img [cls "btn-settings", HP.src images.settings ]
-        ]
-      , div [cls "icon-button", onClick (noPropagate $ RemoveExercise {group, index})]
-        [ img [cls "btn-close", HP.src images.close ]
-        ]
+        [ img [cls "btn-settings", HP.src images.settings ] ]
       ]
     addExercise :: HTML w Action
     addExercise = div [ cls "exercise-entry--button"

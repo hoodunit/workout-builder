@@ -115,14 +115,6 @@ li {
   .row-container__title-bar__title {
     margin: 0 2*$s 0 0;
   }
-
-  .row-container__title-bar__buttons {
-    visibility: hidden;
-  }
-
-  .row-container:hover & .row-container__title-bar__buttons {
-    visibility: visible;
-  }
 }
 
 .row-container__title-bar__buttons {
@@ -383,14 +375,9 @@ td {
 
   & .icon-button {
     position: absolute;
-    display: none;
     right: -4px;
     top: 0;
     background: $color-foreground-faded;
-  }
-
-  .box:hover & .icon-button {
-    display: block;
   }
 }
 
