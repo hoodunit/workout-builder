@@ -2,6 +2,7 @@ module WorkoutBuilder.Types where
 
 import Prelude
 
+import Control.Monad.Except (throwError)
 import Data.Eq.Generic (genericEq)
 import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
@@ -11,6 +12,8 @@ import Data.Set (Set)
 import Data.Set as Set
 import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple(..))
+import Foreign (F, ForeignError(..), unsafeToForeign)
+import Simple.JSON as SimpleJson
 
 type ProgramParams =
   { name :: String
@@ -33,6 +36,9 @@ type ProgramParamDefaults =
   , minSets :: Int }
 
 data ScheduleDay = ScheduleWorkout ScheduleWorkoutDay | ScheduleRest
+derive instance genericScheduleDay :: Generic ScheduleDay _
+instance showScheduleDay :: Show ScheduleDay where
+  show = genericShow
 
 type ScheduleWorkoutDay =
   -- Exercises with these groups are allowed to be schedule on this day.
@@ -118,6 +124,18 @@ instance ordExerciseCategory :: Ord ExerciseCategory where
   compare = genericCompare
 instance eqExerciseCategory :: Eq ExerciseCategory where
   eq = genericEq
+instance writeForeignExerciseCategory :: SimpleJson.WriteForeign ExerciseCategory where
+  writeImpl Compound = unsafeToForeign "compound"
+  writeImpl Isolation = unsafeToForeign "isolation"
+instance readForeignExerciseCategory :: SimpleJson.ReadForeign ExerciseCategory where
+  readImpl val = do
+    str <- SimpleJson.readImpl val
+    case (str :: String) of
+      "compound" -> pure Compound
+      "isolation" -> pure Compound
+      other -> err $ "Could not parse '" <> other <> "' as exercise category"
+    where
+      err = throwError <<< pure <<< ForeignError
 
 exercise :: String -> ExerciseCategory -> Exercise
 exercise name category =
@@ -152,6 +170,24 @@ instance ordIntensity :: Ord Intensity where
   compare = genericCompare
 instance eqIntensity :: Eq Intensity where
   eq = genericEq
+instance writeForeignIntensity :: SimpleJson.WriteForeign Intensity where
+  writeImpl VH = unsafeToForeign "VH"
+  writeImpl H = unsafeToForeign "H"
+  writeImpl M = unsafeToForeign "M"
+  writeImpl L = unsafeToForeign "L"
+  writeImpl VL = unsafeToForeign "VL"
+instance readForeignIntensity :: SimpleJson.ReadForeign Intensity where
+  readImpl val = do
+    str <- SimpleJson.readImpl val
+    case (str :: String) of
+      "VH" -> pure VH
+      "H" -> pure H
+      "M" -> pure M
+      "L" -> pure L
+      "VL" -> pure VL
+      other -> err $ "Could not parse '" <> other <> "' as intensity"
+    where
+      err = throwError <<< pure <<< ForeignError
 
 defaultRepSchemes :: Map Intensity RepScheme
 defaultRepSchemes =
