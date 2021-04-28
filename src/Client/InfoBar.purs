@@ -150,16 +150,16 @@ ref {tag} = HH.a [cls "reference-link", HP.href ("#" <> tag)] [text ("[" <> tag 
 
 refPage :: forall w i. Reference -> Int -> HTML w i
 refPage {tag} pageNum =
-  HH.a [cls "reference-link", HP.href ("#" <> tag)]
+  HH.a [cls "reference-link"]
   [ text ("[" <> tag <> " p. " <> show pageNum <> "]") ]
 
 citePage :: forall w i. Reference -> Int -> HTML w i
 citePage {tag} pageNum =
-  HH.a [cls "citation-link", HP.href ("#" <> tag)]
+  HH.a [cls "citation-link"]
     [ text ("[" <> tag <> " p. " <> show pageNum <> "]") ]
 
 cite :: forall w i. Reference -> HTML w i
-cite {tag} = HH.a [cls "citation-link", HP.href ("#" <> tag)] [text ("[" <> tag <> "]")]
+cite {tag} = HH.a [cls "citation-link"] [text ("[" <> tag <> "]")]
 
 hi :: forall w i. String -> String -> HTML w i
 hi str className = span [cls className] [text str]
