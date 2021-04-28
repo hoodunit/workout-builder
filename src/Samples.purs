@@ -9,7 +9,6 @@ import Data.Map (Map)
 import Data.Map as Map
 import Data.Set as Set
 import Data.Tuple (Tuple(..))
-import WorkoutBuilder.OwnPrograms (ownPrograms)
 import WorkoutBuilder.Programming (defaults, programParamDefaults)
 
 samplePrograms :: Array ProgramParams
@@ -20,7 +19,7 @@ samplePrograms =
   , minimalist
   , fiveThreeOne
   , strongLifts
-  ] <> ownPrograms
+  ]
 
 rrParams :: ProgramParams
 rrParams =
