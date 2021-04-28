@@ -8,4 +8,5 @@ images =
   , chevronRight: "chevron_right_24dp.5ba22248.svg"
   , settings: "settings_24dp.8917e8ad.svg"
   , info: "info_24dp.613e7696.svg"
+  , edit: "edit_24dp.8fa38ae5.svg"
   }

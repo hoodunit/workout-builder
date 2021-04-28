@@ -11,18 +11,24 @@ import Data.Maybe (Maybe(..), fromJust, fromMaybe)
 import Data.Set (Set)
 import Data.Set as Set
 import Effect (Effect)
-import Effect.Class (class MonadEffect)
+import Effect.Class (class MonadEffect, liftEffect)
 import Effect.Class.Console (log)
 import Halogen as H
 import JSURI as Uri
 import Partial.Unsafe (unsafePartial)
 import Simple.JSON as SimpleJson
+import Unsafe.Coerce (unsafeCoerce)
 import Web.Event.Event (Event, stopPropagation)
 import Web.HTML as WebHTML
+import Web.HTML.HTMLInputElement as HTMLInputElement
 import Web.HTML.Location as Location
 import Web.HTML.Window as Window
+import WorkoutBuilder.Client.EditableLabel as EditableLabel
 import WorkoutBuilder.Client.UrlCodecs as UrlCodecs
 import WorkoutBuilder.Programming (groupWithName, programParamDefaults)
+
+nameLabel :: H.RefLabel
+nameLabel = H.RefLabel "program-name"
 
 type State
   = { workoutParams :: ProgramParams
@@ -65,6 +71,7 @@ data Action
   | EditExerciseSetName { name :: String }
   | EditExerciseSetRepScheme { intensity :: Intensity, scheme :: RepScheme }
   | SaveEditedExercise { group :: Group, exercise :: Exercise, index :: Int }
+  | SetProgramName EditableLabel.Output
 
 handleAction :: forall cs o m. MonadEffect m => Action → H.HalogenM State Action cs o m Unit
 handleAction action_ = do
@@ -165,6 +172,18 @@ handleAction_ action_ =
       {workoutParams} <- H.get
       H.modify_ (modifyStateGroup group.name (\g -> g { exercises = Array.updateAt index exercise g.exercises # fromMaybe g.exercises })
         >>> \s -> s { modal = ModalClosed })
+    SetProgramName (EditableLabel.Saved {label})-> H.modify_ \s -> s { workoutParams { name = label } }
+
+readInputValue :: forall cs o m
+                  . MonadEffect m
+                  => H.RefLabel -> H.HalogenM State Action cs o m (Maybe String)
+readInputValue ref = do
+  elem <- H.getRef ref
+  case elem of
+    Nothing -> pure Nothing
+    Just elem_ -> do
+      val <- liftEffect (HTMLInputElement.value (unsafeCoerce elem_))
+      pure (Just val)
 
 editExercise :: forall cs o m
 . MonadEffect m => (Exercise -> Exercise) -> H.HalogenM State Action cs o m Unit

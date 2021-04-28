@@ -20,15 +20,18 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import Type.Proxy (Proxy(..))
 import Web.Event.Event (Event, stopPropagation)
 import Web.UIEvent.MouseEvent (MouseEvent, toEvent)
 import WorkoutBuilder.Analysis (programVolume, volumeWorkoutTime, workoutTimeInMinutes)
 import WorkoutBuilder.Client.AddExerciseModal (addExerciseModal)
 import WorkoutBuilder.Client.Charts.Charts as Charts
 import WorkoutBuilder.Client.EditExerciseModal (editExerciseModal)
+import WorkoutBuilder.Client.EditableLabel (editableLabel)
+import WorkoutBuilder.Client.EditableLabel as EditableLabel
 import WorkoutBuilder.Client.Images (images)
 import WorkoutBuilder.Client.InfoBar (infoBar)
-import WorkoutBuilder.Client.State (Action(..), ModalState(..), State)
+import WorkoutBuilder.Client.State (Action(..), ModalState(..), State, nameLabel)
 import WorkoutBuilder.Client.State as State
 import WorkoutBuilder.Client.Toggle (toggle)
 import WorkoutBuilder.Exercises (allExercises)
@@ -39,6 +42,8 @@ import WorkoutBuilder.Programming (allExerciseGroups, buildProgram, groupWithNam
 import WorkoutBuilder.Samples (samplePrograms)
 import WorkoutBuilder.Samples as Samples
 import WorkoutBuilder.Types as Types
+
+type Slots = (programTitle :: forall q. H.Slot q EditableLabel.Output Unit)
 
 component :: forall q i o m. MonadEffect m => ProgramParams -> H.Component q i o m
 component workoutParams =
@@ -51,7 +56,7 @@ component workoutParams =
     , eval: H.mkEval H.defaultEval { handleAction = State.handleAction }
     }
 
-render :: forall cs m. State -> H.ComponentHTML Action cs m
+render :: forall cs m. MonadEffect m => State -> H.ComponentHTML Action Slots m
 render state = div [cls ("content" <> modalClass)]
                [ infoBar state.infoBar
                , HH.lazy mkContent state.workoutParams
@@ -78,7 +83,10 @@ mkModal {modal} =
         ModalClosed -> "modal-wrapper--closed"
         _ -> "modal-wrapper"
 
-mkContent :: forall cs m. ProgramParams -> H.ComponentHTML Action cs m
+mkContent :: forall cs m
+             . MonadEffect m
+             => ProgramParams
+             -> H.ComponentHTML Action Slots m
 mkContent workoutParams =
   let
     program :: Program
@@ -92,7 +100,8 @@ mkContent workoutParams =
   in
     div [cls "content__main"] $
       [ itemRow "Sample Programs" [] mkSamplePrograms
-      , itemRow "Program" [] [div [cls "label--large"] [text workoutParams.name]]
+      , itemRow "Program" []
+        [ HH.slot (Proxy :: _ "programTitle") unit editableLabel { label: workoutParams.name, extraClass: Nothing } SetProgramName ]
       , itemRow "Exercises (By Group)" [addGroup] (workoutParams.groups
                                                    # Array.mapWithIndex groupBox)
       , itemRow "Schedule" (scheduleOptions <> [addScheduleDay])
