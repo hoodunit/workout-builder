@@ -43,7 +43,8 @@ import WorkoutBuilder.Samples (samplePrograms)
 import WorkoutBuilder.Samples as Samples
 import WorkoutBuilder.Types as Types
 
-type Slots = (programTitle :: forall q. H.Slot q EditableLabel.Output Unit)
+type Slots = ( programTitle :: EditableLabel.Slot Unit
+             , groupTitle :: EditableLabel.Slot Int )
 
 component :: forall q i o m. MonadEffect m => ProgramParams -> H.Component q i o m
 component workoutParams =
@@ -101,7 +102,13 @@ mkContent workoutParams =
     div [cls "content__main"] $
       [ itemRow "Sample Programs" [] mkSamplePrograms
       , itemRow "Program" []
-        [ HH.slot (Proxy :: _ "programTitle") unit editableLabel { label: workoutParams.name, extraClass: Nothing } SetProgramName ]
+        [ HH.slot
+           (Proxy :: _ "programTitle")
+           unit
+           editableLabel
+           { label: workoutParams.name, extraClass: Nothing, size: EditableLabel.Large }
+           SetProgramName
+        ]
       , itemRow "Exercises (By Group)" [addGroup] (workoutParams.groups
                                                    # Array.mapWithIndex groupBox)
       , itemRow "Schedule" (scheduleOptions <> [addScheduleDay])
@@ -190,7 +197,7 @@ dayProgrammingBox params index plan =
   div [cls "box box--large"]
     [ div [cls "box__section box__section--title"]
       [ div [cls "title-bar"]
-        [ div [cls "label--medium"]
+        [ div [cls "title-bar__label label--medium"]
           [ text ("Day " <> show (index + 1) <> ": " <> titleText) ]
         , div [ cls "icon-button", onClick \_ -> RemoveScheduleDay {index}]
           [ img [ cls "btn-close", HP.src images.close ] ]]]
@@ -224,15 +231,25 @@ dayProgrammingBox params index plan =
     toggles = [allToggle selectedGroups] <>
               (groupToggle selectedGroups <$> (Array.fromFoldable allGroups))
 
-groupBox :: forall w. Int -> Group -> HTML w Action
+groupBox :: forall m
+             . MonadEffect m
+             => Int
+             -> Group
+             -> H.ComponentHTML Action Slots m
 groupBox index group =
   div [cls "box box--large"]
    [ div [ cls "box__section box__section--title"]
      [ div [cls "title-bar"]
-       [ input [ HP.value group.name
-               , onValueInput \e -> SetGroupName { index, name: e } ]
+       [ HH.slot
+           (Proxy :: _ "groupTitle")
+           index
+           editableLabel
+           { label: group.name
+           , extraClass: Just "title-bar__label"
+           , size: EditableLabel.Small }
+           (\(EditableLabel.Saved {label}) -> SetGroupName {index, name: label})
        , div [ cls "icon-button", onClick \_ -> RemoveGroup {index}]
-         [ img [ cls "btn-close", HP.src images.close ] ]]]
+         [ img [ cls "btn-delete", HP.src images.delete ] ]]]
    , div [cls "box__section"]
      [ div [cls "title label--small--faded"] [text "Exercises"]
      , div []
@@ -252,7 +269,7 @@ groupBox index group =
      ]
    ]
   where
-    exerciseItem :: Int -> Exercise -> HTML w Action
+    exerciseItem :: forall w. Int -> Exercise -> HTML w Action
     exerciseItem index exercise@{name, category} =
       div [ cls "exercise-entry--button"
           , onClick (const $ ShowExerciseInfo {group, exercise, index})]
@@ -260,7 +277,7 @@ groupBox index group =
       , div [cls "icon-button"]
         [ img [cls "btn-settings", HP.src images.settings ] ]
       ]
-    addExercise :: HTML w Action
+    addExercise :: forall w. HTML w Action
     addExercise = div [ cls "exercise-entry--button--center"
                          , onClick (const $ ShowAddExerciseModal {group})]
       [ img [ cls "exercise-entry__btn btn-add", HP.src images.add ]

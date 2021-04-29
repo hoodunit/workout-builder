@@ -55,24 +55,13 @@ button {
   &:active {
     opacity: 0.5;
   }
+
+  img {
+    height: 14px;
+  }
 }
 
-.btn-close {
-  height: 18px;
-}
 
 .btn-add {
   height: 20px;
-}
-
-.btn-add--small {
-  height: 14px;
-}
-
-.btn-settings {
-  height: 14px;
-}
-
-.btn-edit {
-  height: 14px;
 }

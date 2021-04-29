@@ -21,31 +21,38 @@ data Action =
 type State =
   { editing :: Boolean
   , label :: String
-  , extraClass :: Maybe String }
+  , extraClass :: Maybe String
+  , size :: LabelSize }
 
 type Input =
   { label :: String
-  , extraClass :: Maybe String }
+  , extraClass :: Maybe String
+  , size :: LabelSize }
+
+data LabelSize = Small | Large
   
 data Output = Saved { label :: String }
+
+type Slot id = forall q. H.Slot q Output id
 
 editableLabel :: forall q i o m
                  . MonadEffect m
                  => H.Component q Input Output m
 editableLabel =
   H.mkComponent
-    { initialState: \{label, extraClass} ->
+    { initialState: \{label, extraClass, size} ->
        { editing: false
        , label
-       , extraClass }
+       , extraClass
+       , size }
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction
                                    , receive = Just <<< Receive }
     }
 
 render :: forall cs m. State -> H.ComponentHTML Action cs m
-render {label, editing, extraClass} =
-  div [cls ("editable-label" <> extraClass_)]
+render {label, editing, extraClass, size} =
+  div [cls (labelClass <> extraClass_)]
     case editing of
       true -> [ input [ cls "editable-label__input"
                       , HP.value label
@@ -70,6 +77,9 @@ render {label, editing, extraClass} =
     extraClass_ = case extraClass of
                    Just c -> " " <> c
                    Nothing -> ""
+    labelClass = case size of
+      Small -> "editable-label--small"
+      Large -> "editable-label--large"
 
 handleAction :: forall cs o m. MonadEffect m => Action → H.HalogenM State Action cs Output m Unit
 handleAction action = case action of

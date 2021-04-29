@@ -1,0 +1,43 @@
+@import './constants.scss';
+
+.editable-label {
+  display: flex;
+  align-items: center;
+
+  &--small {
+    @extend .editable-label;
+  }
+
+  &--large {
+    @extend .editable-label;
+  }
+
+}
+
+.editable-label__label {
+  margin-right: 2*$s;
+  flex-grow: 1;
+
+  .editable-label--small & {
+    @extend .label--small;
+  }
+
+  .editable-label--large & {
+    @extend .label--large;
+  }
+}
+
+.editable-label__input {
+  margin-right: 2*$s;
+  flex-grow: 1;
+  max-width: 100%;
+
+  .editable-label--small & {
+    @extend .label--small;
+  }
+
+  .editable-label--large & {
+    @extend .label--large;
+    width: 600px;
+  }
+}
