@@ -162,12 +162,17 @@ li {
 .row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: flex-start;
   margin: $s 0 $s -2*$s;
   padding: $s 0;
   & > * {
     margin-bottom: $s;
     margin-left: 2*$s;
+  }
+
+  @media screen and (min-width: $desktop-width) {
+    justify-content: flex-start;
   }
 }
 
