@@ -41,11 +41,12 @@ $color-compound: $color-orange-yellow;
 $color-synergist: $color-blue-light;
 $color-stabilizer: $color-blue-dark;
 
-$z-overlay: 1;
-
+$z-overlay: 100;
+$z-nav-bar: 2;
+$z-side-bar: 1;
 $s: 8px;
-
 $box-border-radius: 4px;
+$desktop-width: 1024px;
 
 @font-face {
   font-family: "Noto Sans JP";
@@ -157,6 +158,11 @@ $box-border-radius: 4px;
   &--tiny--heavy {
     @extend .label--tiny;
     font-weight: 700;
+  }
+  &--tiny--faded {
+    @extend .label--tiny;
+    color: $color-font-faded;
+    fill: $color-font-faded;
   }
   &--tiny--dark {
     @extend .label--tiny;

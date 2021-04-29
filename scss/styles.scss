@@ -8,10 +8,6 @@
 
 @import './constants.scss';
 
-$side-bar-width-min: 430px;
-$side-bar-width-max: 600px;
-$side-bar-width: 30vw;
-
 body {
   @extend .text--medium;
   color: $color-font;
@@ -61,6 +57,7 @@ li {
   width: 100vw;
   background-color: $color-foreground;
   padding: $s 2*$s;
+  z-index: $z-nav-bar;
 }
 
 .nav-bar__side-bar-toggle.icon-button img {
@@ -83,10 +80,15 @@ li {
   background-color: $color-foreground;
   height: 100vh;
   width: 0;
-  position: sticky;
-  top: 0;
   overflow-y: hidden;
   overflow-x: hidden;
+  position: fixed;
+  z-index: $z-side-bar;
+
+  @media screen and (min-width: $desktop-width) {
+    position: sticky;
+    top: 0;
+  }
 
   .sidebar-title-bar .title {
     display: none;
@@ -97,15 +99,23 @@ li {
   }
 
   &.content__sidebar--open {
-    width: $side-bar-width;
-    min-width: $side-bar-width-min;
-    max-width: $side-bar-width-max;
+    width: 100%;
+    min-width: 300px;
+    max-width: 100%;
     overflow-y: auto;
     overflow-x: auto;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
 
     .content__sidebar__content, .sidebar-title-bar .title {
       display: initial;
       opacity: 1;
+    }
+
+    @media screen and (min-width: $desktop-width) {
+      width: 30vw;
+      min-width: 430px;
+      max-width: 600px;
+      filter: none;
     }
   }
 }
@@ -239,6 +249,19 @@ table {
   border: solid 1px #222;
   border-collapse: separate;
   border-spacing: $s;
+
+  &.table--small {
+    @extend .label--tiny--faded;
+    th {
+      @extend .label--tiny--faded;
+    }
+    @media screen and (min-width: $desktop-width) {
+      font-size: 12px;
+      th {
+        font-size: 12px;
+      }
+    }
+  }
 }
 
 th {

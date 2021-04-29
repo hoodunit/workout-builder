@@ -78,7 +78,7 @@ infoContent =
 
 intensityTable :: forall w i. HTML w i
 intensityTable =
-  table []
+  table [cls "table--small"]
     [ thead []
       [ tr []
         [ th [] []

@@ -51,7 +51,7 @@ component workoutParams =
   H.mkComponent
     { initialState: \_ -> { workoutParams
                           , lastPeriodization: Map.empty
-                          , infoBar: { isOpen: true }
+                          , infoBar: { isOpen: false }
                           , modal: ModalClosed }
     , render: HH.lazy render
     , eval: H.mkEval H.defaultEval { handleAction = State.handleAction }
