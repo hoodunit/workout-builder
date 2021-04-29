@@ -193,7 +193,15 @@ li {
 }
 
 .box--wide {
-  width: 1000px;
+  min-width: 300px;
+  max-width: $desktop-width - 100px;
+  width: 100%;
+
+  @media screen and (min-width: $desktop-width) {
+    min-width: 500px;
+    max-width: 1000px;
+    width: 100%;
+  }
 }
 
 .box__section {
