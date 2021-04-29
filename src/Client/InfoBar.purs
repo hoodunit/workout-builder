@@ -14,21 +14,15 @@ import WorkoutBuilder.Client.State (Action(..), InfoBarState)
 infoBar :: forall w i. InfoBarState -> HTML w Action
 infoBar state@{isOpen} =
   div [cls ("content__sidebar" <> openClass)]
-    [ div [cls "sidebar-title-bar"]
-      [ div [cls "title"] [text "Workout Builder"]
-      , showHideBtn isOpen
-      ]
-    , div [cls "content__sidebar__content"] [infoContent]
-    ]
+    [ div [cls "content__sidebar__content"] [infoContent] ]
   where
     openClass = if isOpen then " content__sidebar--open" else ""
 
 infoContent :: forall w. HTML w Action
 infoContent =
   div [cls "content__sidebar__content__wrapper"]
-    [ section "Guidelines for Optimal Strength Training"
-      [ par [text "The following are general guidelines for optimal strength and hypertrophy development. The focus is on bodyweight strength training but this can generally be applied to weight lifting as well. All advice is intended to be directly sourced from reputable sources such as Steven Low (bodyweight strength training), Brad Schoenfeld (hypertrophy), Mike Israetel (hypertrophy and strength/powerlifting training), and others."]
-      ]
+    [ div [cls "sidebar__title"] [text "Guidelines for Optimal Strength Training"]
+    , par [text "The following are general guidelines for optimal strength and hypertrophy development. The focus is on bodyweight strength training but this can generally be applied to weight lifting as well. All advice is intended to be directly sourced from reputable sources such as Steven Low (bodyweight strength training), Brad Schoenfeld (hypertrophy), Mike Israetel (hypertrophy and strength/powerlifting training), and others."]
     , section "Goals and Specificity"
       [ par [text "Optimal training depends on your specific goals and will be different for specific strength, hypertrophy (muscle mass), and skill goals. Only choose exercises that advance your specific goals."]
       ]
@@ -170,11 +164,3 @@ mkReference { tag, title, author, publishYear, link } =
   [ text $ "[" <> tag <> "] \"" <> title <> "\". " <> author <> ". " <> publishYear <> "." ]
 
 par content = div [cls "paragraph"] content
-
-showHideBtn :: forall w. Boolean -> HTML w Action
-showHideBtn isOpen =
-  div [ cls "icon-button"
-      , HE.onClick \_ -> SetInfoBarIsOpen {isOpen: (not isOpen)} ]
-    [ HH.img [ cls "btn-chevron", HP.src img ] ]
-  where
-    img = if isOpen then images.chevronLeft else images.chevronRight

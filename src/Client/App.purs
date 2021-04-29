@@ -31,7 +31,7 @@ import WorkoutBuilder.Client.EditableLabel (editableLabel)
 import WorkoutBuilder.Client.EditableLabel as EditableLabel
 import WorkoutBuilder.Client.Images (images)
 import WorkoutBuilder.Client.InfoBar (infoBar)
-import WorkoutBuilder.Client.State (Action(..), ModalState(..), State, nameLabel)
+import WorkoutBuilder.Client.State (Action(..), ModalState(..), State, InfoBarState, nameLabel)
 import WorkoutBuilder.Client.State as State
 import WorkoutBuilder.Client.Toggle (toggle)
 import WorkoutBuilder.Exercises (allExercises)
@@ -58,15 +58,39 @@ component workoutParams =
     }
 
 render :: forall cs m. MonadEffect m => State -> H.ComponentHTML Action Slots m
-render state = div [cls ("content" <> modalClass)]
-               [ infoBar state.infoBar
-               , HH.lazy mkContent state.workoutParams
-               , mkModal state
-               ]
+render state =
+  div []
+    [ navBar state.infoBar
+    , div [cls ("content" <> modalClass)]
+      [ infoBar state.infoBar
+      , HH.lazy mkContent state.workoutParams
+      , mkModal state
+      ]
+    ]
   where
     modalClass = case state.modal of
       ModalClosed -> " content--modal-closed"
       _ -> ""
+
+navBar :: forall w. InfoBarState -> HTML w Action
+navBar {isOpen} =
+  div [cls "nav-bar"]
+    [ div [ cls "nav-bar__side-bar-toggle icon-button"
+          , onClick \_ -> SetInfoBarIsOpen {isOpen: not isOpen}]
+        [ HH.img [ cls imgCls, HP.src images.chevronLeft ]
+        , div [cls "nav-bar__side-bar__title"] [text "Guidelines"]
+        ]
+    ]
+  where
+    imgCls = if isOpen then "btn-chevron--up" else "btn-chevron--down"
+
+showHideBtn :: forall w. Boolean -> HTML w Action
+showHideBtn isOpen =
+  div [ cls "icon-button"
+      , HE.onClick \_ -> SetInfoBarIsOpen {isOpen: (not isOpen)} ]
+    [ HH.img [ cls "btn-chevron", HP.src img ] ]
+  where
+    img = if isOpen then images.chevronLeft else images.chevronRight
 
 mkModal :: forall w. State -> HTML w Action
 mkModal {modal} =

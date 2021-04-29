@@ -46,6 +46,7 @@ a.reference {
 
 .paragraph {
   margin-top: $s;
+  color: $color-font-faded;
 
   section__content:first-child & {
     margin-top: 0;

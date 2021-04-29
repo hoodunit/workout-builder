@@ -65,3 +65,11 @@ button {
 .btn-add {
   height: 20px;
 }
+
+.btn-chevron--down {
+  transform: rotate(-90deg);
+}
+
+.btn-chevron--up {
+  transform: rotate(90deg);
+}
