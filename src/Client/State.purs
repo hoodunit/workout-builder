@@ -158,7 +158,8 @@ handleAction_ action_ =
       H.modify_ (modifyStateGroup group.name (\g -> g { exercises = Array.cons exercise g.exercises })
                  >>> \s -> s { modal = ModalClosed })
     RemoveExercise {group, index} -> do
-      H.modify_ (modifyStateGroup group.name (\g -> g { exercises = Array.deleteAt index g.exercises # fromMaybe g.exercises }))
+      H.modify_ (modifyStateGroup group.name (\g -> g { exercises = Array.deleteAt index g.exercises # fromMaybe g.exercises })
+                 >>> \s -> s { modal = ModalClosed })
     SetInfoBarIsOpen {isOpen} -> H.modify_ \s -> s { infoBar { isOpen = isOpen } }
     ShowExerciseInfo {group, exercise, index} -> do
       H.modify_ \s -> s { modal = ModalEditingExercise {group, exercise, index} }

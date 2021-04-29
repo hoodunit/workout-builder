@@ -22,6 +22,7 @@ allMuscles =
  , infraspinatus
  , lats
  , levatorScapulae
+ , obliques
  , pecsLower
  , pecsMinor
  , pecsUpper
@@ -82,6 +83,7 @@ byBodyPart =
     , soleus
     , gastrocnemius
     , adductorMagnus
+    , iliopsoas
    ]
   , core:
     [ rectusAbdominus
