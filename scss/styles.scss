@@ -8,10 +8,12 @@
 
 @import './constants.scss';
 
+$nav-bar-height: 40px;
+
 body {
   @extend .text--medium;
   color: $color-font;
-  background-color: $color-background;
+  background-color: $color-foreground;
   overflow-y: hidden;
 }
 
@@ -41,8 +43,10 @@ li {
 
 .content {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - #{$nav-bar-height});
   overflow-y: visible;
+  margin-top: $nav-bar-height;
+  background-color: $color-background;
 
   &.content--modal-closed {
     overflow-y: auto;
@@ -53,11 +57,14 @@ li {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  position: sticky;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   background-color: $color-foreground;
-  padding: $s 2*$s;
+  padding: 0 2*$s;
   z-index: $z-nav-bar;
+  height: $nav-bar-height;
 }
 
 .nav-bar__side-bar-toggle.icon-button img {
