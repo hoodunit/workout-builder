@@ -51,7 +51,7 @@ component workoutParams =
   H.mkComponent
     { initialState: \_ -> { workoutParams
                           , lastPeriodization: Map.empty
-                          , infoBar: { isOpen: false }
+                          , infoBar: { isOpen: true }
                           , modal: ModalClosed }
     , render: HH.lazy render
     , eval: H.mkEval H.defaultEval { handleAction = State.handleAction }
@@ -61,9 +61,10 @@ render :: forall cs m. MonadEffect m => State -> H.ComponentHTML Action Slots m
 render state =
   div []
     [ navBar state.infoBar
-    , div [cls ("content" <> modalClass)]
+    , div [cls ("content" <> modalClass <> sideBarClass)]
       [ infoBar state.infoBar
       , HH.lazy mkContent state.workoutParams
+      , div [cls "content__sidebar-overlay"] []
       , mkModal state
       ]
     ]
@@ -71,6 +72,9 @@ render state =
     modalClass = case state.modal of
       ModalClosed -> " content--modal-closed"
       _ -> ""
+    sideBarClass = case state.infoBar.isOpen of
+      true -> " content--sidebar-open"
+      false -> ""
 
 navBar :: forall w. InfoBarState -> HTML w Action
 navBar {isOpen} =

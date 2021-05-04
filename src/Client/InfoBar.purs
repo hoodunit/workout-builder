@@ -12,17 +12,15 @@ import WorkoutBuilder.Client.References as Refs
 import WorkoutBuilder.Client.State (Action(..), InfoBarState)
 
 infoBar :: forall w i. InfoBarState -> HTML w Action
-infoBar state@{isOpen} =
-  div [cls ("content__sidebar" <> openClass)]
+infoBar _ =
+  div [cls "content__sidebar"]
     [ div [cls "content__sidebar__content"] [infoContent] ]
-  where
-    openClass = if isOpen then " content__sidebar--open" else ""
 
 infoContent :: forall w. HTML w Action
 infoContent =
   div [cls "content__sidebar__content__wrapper"]
-    [ div [cls "sidebar__title"] [text "Guidelines for Optimal Strength Training"]
-    , par [text "The following are general guidelines for optimal strength and hypertrophy development. The focus is on bodyweight strength training but this can generally be applied to weight lifting as well. All advice is intended to be directly sourced from reputable sources such as Steven Low (bodyweight strength training), Brad Schoenfeld (hypertrophy), Mike Israetel (hypertrophy and strength/powerlifting training), and others."]
+    [ div [cls "sidebar__title"] [text "Designing a Strength Training Program"]
+    , par [text "This app provides tools and guideline for creating an optimal strength training program for your specific goals and schedule. The focus is on bodyweight strength training but the information can generally be applied to weight lifting as well. All advice is intended to be directly sourced from reputable sources such as Steven Low (bodyweight strength training), Brad Schoenfeld (hypertrophy), Mike Israetel (hypertrophy and strength/powerlifting training), and others."]
     , section "Goals and Specificity"
       [ par [text "Optimal training depends on your specific goals and will be different for specific strength, hypertrophy (muscle mass), and skill goals. Only choose exercises that advance your specific goals."]
       ]

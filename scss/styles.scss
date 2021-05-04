@@ -50,6 +50,14 @@ li {
 
   &.content--modal-closed {
     overflow-y: auto;
+
+    &.content--sidebar--open {
+      overflow-y: visible;
+
+      @media screen and (min-width: $desktop-width) {
+        overflow-y: auto;
+      }
+    }
   }
 }
 
@@ -105,10 +113,10 @@ li {
     opacity: 0;
   }
 
-  &.content__sidebar--open {
+  .content--sidebar-open & {
     width: 100%;
     min-width: 300px;
-    max-width: 100%;
+    max-width: 90%;
     overflow-y: auto;
     overflow-x: auto;
     filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
@@ -123,6 +131,28 @@ li {
       min-width: 430px;
       max-width: 600px;
       filter: none;
+    }
+  }
+}
+
+.content__sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $color-foreground;
+  opacity: 0.6;
+  display: none;
+
+  @media screen and (min-width: $desktop-width) {
+    display: none;
+  }
+
+  .content--sidebar-open & {
+    display: block;
+    @media screen and (min-width: $desktop-width) {
+        display: none;
     }
   }
 }
