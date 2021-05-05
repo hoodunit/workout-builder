@@ -7,43 +7,44 @@ import WorkoutBuilder.Types
 
 allExercises :: Array Exercise
 allExercises =
-  [ bulgarianSplitSquat
-  , squat
-  , pistolSquat
-  , shrimpSquat
-  , singleLegRdl
-  , nordicCurl
-  , weightedDip
-  , ringDip
-  , pushUp
-  , weightedRingPushUp
-  , pikePushUp
-  , handstandPushUp
-  , pseudoPlanchePushUp
-  , archerPullUp
-  , oneArmPullUp
-  , pullUp
-  , chinUp
-  , weightedPullUp
-  , frontLeverRow
-  , weightedHorizontalRow
-  , oneArmRow
-  , bicepCurl
-  , lateralRaise
-  , shrug
-  , copenhagenPlank
-  , hyperextension
-  , pikePullThrough
-  , pancakeStretch
-  , weightedHang
-  , straddleSplits
-  , hangingLegRaise
-  , legCurl
+  [ archerPullUp
+  , backLever
   , benchPress
-  , militaryPress
-  , dumbbellRow
+  , bicepCurl
+  , bulgarianSplitSquat
+  , chinUp
+  , copenhagenPlank
   , deadlift
+  , dumbbellRow
+  , frontLeverRow
+  , handstandPushUp
+  , hangingLegRaise
+  , hyperextension
+  , lateralRaise
+  , legCurl
+  , militaryPress
+  , nordicCurl
+  , oneArmPullUp
+  , oneArmRow
+  , pancakeStretch
+  , pikePullThrough
+  , pikePushUp
+  , pistolSquat
+  , pseudoPlanchePushUp
+  , pullUp
+  , pushUp
+  , ringDip
   , romanianDeadlift
+  , shrimpSquat
+  , shrug
+  , singleLegRdl
+  , squat
+  , straddleSplits
+  , weightedDip
+  , weightedHang
+  , weightedHorizontalRow
+  , weightedPullUp
+  , weightedRingPushUp
   ]
 
 -- Sourced from ExRx.net (where available)
@@ -278,6 +279,17 @@ oneArmRow =
   , scheme: defaultRepSchemes
   , category: Compound
   , muscles: frontLeverRow.muscles
+  }
+backLever :: Exercise
+backLever =
+  { name: "Back lever"
+  , scheme: defaultRepSchemes
+  , category: Compound
+  , muscles: -- Source: https://www.reddit.com/r/bodyweightfitness/comments/9y49lu/muscles_activated_in_the_back_lever
+    { target: set []
+    , synergists: set [biceps, brachialis, brachioradialis, deltoidAnterior, lats, pecsLower, pecsUpper, pecsMinor, serratusAnterior, teresMajor, wristFlexors]
+    , stabilizers: set []
+    }
   }
 bicepCurl :: Exercise
 bicepCurl =
