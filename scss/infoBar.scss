@@ -35,13 +35,14 @@ a.reference {
 }
 
 .reference-link {
-  @extend .label--small--faded;
+  @extend .label--small--bright;
 }
 
 .citation-link {
   @extend .label--tiny--dark;
   margin: 0 4px;
   vertical-align: top;
+  line-height: 15px;
 }
 
 .paragraph {

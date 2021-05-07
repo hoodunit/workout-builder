@@ -93,7 +93,7 @@ li {
 
 .content__sidebar {
   background-color: $color-foreground;
-  height: 100vh;
+  height: calc(100vh - #{$nav-bar-height});
   width: 0;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -301,14 +301,19 @@ table {
   border-spacing: $s;
 
   &.table--small {
-    @extend .label--tiny--faded;
     th {
       @extend .label--tiny--faded;
     }
+
+    td {
+      @extend .text--tiny--faded;
+    }
     @media screen and (min-width: $desktop-width) {
       font-size: 12px;
+      line-height: 14px;
       th {
         font-size: 12px;
+        line-height: 14px;
       }
     }
   }

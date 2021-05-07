@@ -46,7 +46,7 @@ $z-nav-bar: 2;
 $z-side-bar: 1;
 $s: 8px;
 $box-border-radius: 4px;
-$desktop-width: 1024px;
+$desktop-width: 768px;
 
 @font-face {
   font-family: "Noto Sans JP";
@@ -134,6 +134,7 @@ $desktop-width: 1024px;
     @extend .label;
     font-size: 12px;
     font-weight: 400;
+    line-height: 14px;
   }
   &--small--heavy {
     @extend .label--small;
@@ -142,6 +143,12 @@ $desktop-width: 1024px;
   &--small--light {
     @extend .label--small;
     font-weight: 300;
+  }
+  &--small--bright{
+    @extend .label--small;
+    font-weight: 400;
+    color: $color-font;
+    fill: $color-font;
   }
   &--small--faded {
     @extend .label--small;
@@ -226,5 +233,15 @@ $desktop-width: 1024px;
     @extend .text;
     font-size: 14px;
     line-height: 18px;
+  }
+  &--tiny {
+    @extend .text;
+    font-size: 10px;
+    line-height: 10px;
+  }
+  &--tiny--faded {
+    @extend .text--tiny;
+    color: $color-font-faded;
+    fill: $color-font-faded;
   }
 }
