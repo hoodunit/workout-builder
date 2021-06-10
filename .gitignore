@@ -13,3 +13,4 @@ dist/
 *.js.map
 /prod/
 /output_prod/
+/data
