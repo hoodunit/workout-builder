@@ -57,7 +57,7 @@ sch =
 
 sbsPeriodization :: Reference
 sbsPeriodization =
-  { tag: "sch"
+  { tag: "sbsPeriod"
   , title: "Periodization: What the Data Say"
   , author: "Greg Nuckols"
   , publishYear: "2018"
