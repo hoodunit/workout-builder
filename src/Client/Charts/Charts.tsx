@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import { MuscleBarChart } from "./MuscleBarChart"
+import { MuscleBarChart } from "root/Client/Charts/MuscleBarChart"
 
 export const render = (elemId: string) => (props: any) => (val: any) => {
   const elem = document.getElementById(elemId)
